@@ -1,1 +1,53 @@
 
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+
+    margin: 0;
+
+    background: #000;
+
+    color: #fff;
+
+    font-family:
+        "Courier New",
+        Courier,
+        monospace;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+}
+
+main {
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 2rem;
+
+}
+
+a {
+
+    color: inherit;
+
+}
+
+img {
+
+    max-width: 100%;
+
+    height: auto;
+
+}
