@@ -1,13 +1,17 @@
 {% extends "base.njk" %}
 
 {% block title %}
+
     {{ title }}
+
 {% endblock %}
 
 {% block extraCss %}
+
 <link
     rel="stylesheet"
     href="/assets/css/blog.css">
+
 {% endblock %}
 
 {% block pageContent %}
@@ -27,7 +31,7 @@
 
 </h1>
 
-<hr>
+<hr class="post-header-divider">
 
 <article class="blog-post">
 
@@ -35,7 +39,7 @@
 
 </article>
 
-<hr>
+<hr class="post-content-divider">
 
 <nav class="post-navigation">
 
@@ -68,5 +72,7 @@
     </div>
 
 </nav>
+
 <hr class="post-navigation-divider">
+
 {% endblock %}
