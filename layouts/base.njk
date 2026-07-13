@@ -44,18 +44,57 @@ docs/03-layout-base.md
     {% endblock %}
 
 </head>
-
 <body>
 
-    {% block body %}
+<div class="layout">
 
-        <main>
+    <aside class="sidebar">
+
+        <nav>
+
+            <ul>
+
+                <li>
+                    <a href="/">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/blog/">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/pics/">
+                        Pics
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/links/">
+                        Links
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <main class="content">
+
+        {% block body %}
 
             {{ content | safe }}
 
-        </main>
+        {% endblock %}
 
-    {% endblock %}
+    </main>
+
+</div>
 
 </body>
 
