@@ -41,7 +41,7 @@ Sempre que a organização das pastas mudar, este documento deverá ser atualiza
 │   │       ├── posts.11tydata.js
 │   │       └── *.md
 │   │
-│   ├── disease/
+│   ├──disease-history/
 │   │
 │   ├── links/
 │   │
