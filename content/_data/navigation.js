@@ -9,7 +9,7 @@ module.exports = [
     },
     {
         title: "Disease",
-        url: "/disease/"
+        url: "/disease-history/"
     },
     {
         title: "Links",
