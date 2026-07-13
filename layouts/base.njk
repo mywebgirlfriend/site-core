@@ -1,45 +1,98 @@
-{% extends "base.njk" %}
+{#
+========================================================
 
-{% block title %}
-    {{ title }}
-{% endblock %}
+Arquivo:
+layouts/base.njk
 
-{% block extraCss %}
-<link
-    rel="stylesheet"
-    href="/assets/css/blog.css">
-{% endblock %}
 
-{% block pageContent %}
+Objetivo:
+Layout base utilizado por todas as páginas do site.
 
-<p class="post-date">
 
-    {{ page.date | date: "%Y-%m-%d" }}
 
-</p>
 
-<h1>
+Responsabilidades:
 
-    {{ title }}
+- Estrutura HTML comum.
+- CSS global.
+- Barra lateral.
+- Área principal do conteúdo.
 
-</h1>
+Layouts especializados (como blog.njk)
+herdam deste arquivo.
 
-<hr>
+========================================================
+#}
 
-<article class="blog-post">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    {{ content | safe }}
+<head>
 
-</article>
+    <meta charset="UTF-8">
 
-<p>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <a href="/">
+    <title>
+        {% block title %}
+            {{ title or "Meu Site" }}
+        {% endblock %}
+    </title>
 
-        ← Back to Home
+    <link
+        rel="stylesheet"
+        href="/assets/css/style.css">
 
-    </a>
+    {% block extraCss %}{% endblock %}
 
-</p>
+</head>
 
-{% endblock %}
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <nav>
+
+    <ul>
+
+        {% for item in navigation %}
+
+            <li>
+
+                <a href="{{ item.url }}">
+
+                    {{ item.title }}
+
+                </a>
+
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+</nav>
+
+    </aside>
+
+    <main class="content">
+
+        {% block body %}
+
+            {% block pageContent %}
+                {{ content | safe }}
+            {% endblock %}
+
+        {% endblock %}
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
