@@ -53,19 +53,25 @@ herdam deste arquivo.
 
         <nav>
 
-            <ul>
+    <ul>
 
-                <li><a href="/">Home</a></li>
+        {% for item in navigation %}
 
-                <li><a href="/blog/">Blog</a></li>
+            <li>
 
-                <li><a href="/pics/">Pics</a></li>
+                <a href="{{ item.url }}">
 
-                <li><a href="/links/">Links</a></li>
+                    {{ item.title }}
 
-            </ul>
+                </a>
 
-        </nav>
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+</nav>
 
     </aside>
 
