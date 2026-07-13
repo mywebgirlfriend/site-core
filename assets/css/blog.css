@@ -34,3 +34,27 @@
     margin-top: 3rem;
 
 }
+
+.post-navigation {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 3rem;
+
+}
+
+.post-navigation div {
+
+    width: 50%;
+
+}
+
+.post-navigation div:last-child {
+
+    text-align: right;
+
+}
