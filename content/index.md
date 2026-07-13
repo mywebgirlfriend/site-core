@@ -1,16 +1,16 @@
 ---
-layout: ../layouts/base.njk
-title: Home
+layout: base.njk
+title: MyWebGirlfriend
 ---
 
 # MyWebGirlfriend
 
-Este site ainda está em construção.
+Welcome.
 
-Se você está lendo esta página, significa que:
+This website is currently under construction.
 
-- O GitHub Actions funcionou.
-- O GitHub Pages publicou o site.
-- O Eleventy gerou esta página corretamente.
+The purpose of this project is not only to publish content, but also to document every step required to build and maintain a static website using Eleventy, GitHub Pages and GitHub Actions.
 
-Este é apenas o primeiro passo.
+This page is intentionally simple.
+
+Each future commit will introduce one visible change so that anyone can understand exactly what each modification does.
