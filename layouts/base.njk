@@ -5,16 +5,17 @@ Arquivo:
 layouts/base.njk
 
 Objetivo:
-Layout base de todo o projeto.
+Layout base utilizado por todas as páginas do site.
 
-Este arquivo contém apenas a estrutura comum
-de todas as páginas.
+Responsabilidades:
+
+- Estrutura HTML comum.
+- CSS global.
+- Barra lateral.
+- Área principal do conteúdo.
 
 Layouts especializados (como blog.njk)
-devem herdar deste arquivo.
-
-A documentação correspondente estará em:
-docs/03-layout-base.md
+herdam deste arquivo.
 
 ========================================================
 #}
@@ -32,7 +33,7 @@ docs/03-layout-base.md
 
     <title>
         {% block title %}
-            Meu Site
+            {{ title or "Meu Site" }}
         {% endblock %}
     </title>
 
@@ -40,10 +41,10 @@ docs/03-layout-base.md
         rel="stylesheet"
         href="/assets/css/style.css">
 
-    {% block extraCss %}
-    {% endblock %}
+    {% block extraCss %}{% endblock %}
 
 </head>
+
 <body>
 
 <div class="layout">
@@ -54,29 +55,13 @@ docs/03-layout-base.md
 
             <ul>
 
-                <li>
-                    <a href="/">
-                        Home
-                    </a>
-                </li>
+                <li><a href="/">Home</a></li>
 
-                <li>
-                    <a href="/blog/">
-                        Blog
-                    </a>
-                </li>
+                <li><a href="/blog/">Blog</a></li>
 
-                <li>
-                    <a href="/pics/">
-                        Pics
-                    </a>
-                </li>
+                <li><a href="/pics/">Pics</a></li>
 
-                <li>
-                    <a href="/links/">
-                        Links
-                    </a>
-                </li>
+                <li><a href="/links/">Links</a></li>
 
             </ul>
 
@@ -88,7 +73,9 @@ docs/03-layout-base.md
 
         {% block body %}
 
-            {{ content | safe }}
+            {% block pageContent %}
+                {{ content | safe }}
+            {% endblock %}
 
         {% endblock %}
 
