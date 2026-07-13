@@ -446,6 +446,21 @@ Toda nova funcionalidade deverá respeitar esses quatro princípios.
 Caso uma implementação torne o projeto mais complexo sem trazer benefícios claros, ela deverá ser reavaliada.
 
 ---
+# Responsabilidade dos arquivos CSS
+
+As folhas de estilo devem seguir a mesma separação de responsabilidades adotada pelos layouts.
+
+Regra geral:
+
+* `assets/css/style.css` contém estilos pertencentes ao layout base do site.
+* `assets/css/blog.css` contém estilos exclusivos do layout dos artigos do Blog.
+
+Um componente global nunca deve depender de um arquivo CSS carregado apenas por uma seção específica.
+
+Da mesma forma, estilos exclusivos dos artigos não devem ser movidos para o CSS global sem necessidade.
+
+Essa convenção reduz acoplamento e facilita a manutenção do projeto.
+
 
 # Referências
 
