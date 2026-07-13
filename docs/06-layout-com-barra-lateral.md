@@ -376,6 +376,34 @@ Ao concluir esta etapa aprendemos:
 
 ✅ Como essa estrutura servirá de base para todo o restante do projeto.
 
+# Layout dos artigos
+
+É importante distinguir a seção Blog do layout utilizado pelos artigos.
+
+A página:
+
+```text id="qrr52d"
+content/blog/index.njk
+```
+
+representa o índice da seção.
+
+Já os arquivos:
+
+```text id="s7h5bx"
+content/blog/posts/*.md
+```
+
+representam os artigos individuais.
+
+Todos os artigos utilizam automaticamente:
+
+```text id="shw0ry"
+layouts/blog.njk
+```
+
+Esse layout é responsável exclusivamente pela experiência de leitura dos artigos e não participa da listagem principal do Blog.
+
 ---
 
 # Histórico
