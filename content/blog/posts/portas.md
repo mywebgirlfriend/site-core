@@ -36,14 +36,14 @@ Sé: 1° vagão, última porta (descer pro jabaquara)
 Higienópolis: porta 17 (contar ao contrário na luz?? )
 Butantã: porta 9 
 
-\> Luz
+> Luz
 República: porta 10 
 Luz: 6ª porta a partir do início do trem  
 
 
 ### Verde
-\> Vila Madalena 
+> Vila Madalena 
 Consolação:   Pra sair da estação último vagão, pra ir linha amarela, primeiro vagão 
 
-\> Vila prudente
+> Vila prudente
 Paraíso: (pegar azul sentido Tucuruvi) segundo vagão de trás pra frente, 2ª porta 
