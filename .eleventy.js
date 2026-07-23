@@ -30,6 +30,32 @@ module.exports = function (eleventyConfig) {
 
     });
 
+    /*
+     * ==========================================================
+     * Filtro para formatação das datas dos artigos
+     * ==========================================================
+     *
+     * Exemplo de saída:
+     *
+     * Thu, Feb 20, 2020 - GMT-03:00
+     *
+     */
+    eleventyConfig.addFilter("formatPostDate", function (date) {
+
+        const formatter = new Intl.DateTimeFormat("en-US", {
+
+            weekday: "short",
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            timeZone: "America/Sao_Paulo"
+
+        });
+
+        return `${formatter.format(date)} - GMT-03:00`;
+
+    });
+
     return {
 
         /*
