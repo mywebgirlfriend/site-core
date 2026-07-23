@@ -137,3 +137,21 @@ h1 + hr {
     margin: 2rem auto;
 
 }
+
+.blog-post figure {
+
+    margin: 2rem auto;
+
+    text-align: center;
+
+}
+
+.blog-post figcaption {
+
+    margin-top: .75rem;
+
+    font-size: .9rem;
+
+    font-style: italic;
+
+}
