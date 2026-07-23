@@ -1,109 +1,56 @@
 # Padrões de Layout
 
-**Arquivo:**
+Este documento descreve as responsabilidades de cada layout utilizado pelo projeto.
 
-```text
-docs/_03-padroes-de-layout.md
-```
+O objetivo é manter uma separação clara entre infraestrutura, apresentação e comportamento de cada seção do site.
 
 ---
 
-# Objetivo
+# Layout base
 
-Este documento descreve a arquitetura dos layouts utilizados pelo projeto.
-
-Os layouts são responsáveis exclusivamente pela estrutura visual das páginas.
-
-Eles não devem conter conteúdo específico.
-
-O conteúdo é responsabilidade dos arquivos Markdown e dos templates das seções.
-
----
-
-# Filosofia
-
-O projeto utiliza herança de layouts.
-
-Isso permite reutilizar a estrutura comum do site e criar layouts especializados apenas quando necessário.
-
-A arquitetura busca evitar duplicação de código e facilitar futuras alterações.
-
----
-
-# Estrutura atual
-
-```text
-base.njk
-
-        ▲
-
-        │
-
-blog.njk
-
-        ▲
-
-        │
-
-Markdown
-```
-
----
-
-# base.njk
-
-O arquivo:
+Arquivo:
 
 ```text
 layouts/base.njk
 ```
 
-é o layout principal do projeto.
+O `base.njk` é o layout principal do projeto.
 
-Toda página publicada utiliza esse layout direta ou indiretamente.
-
-## Rodapé global
-
-O layout base é responsável pelo rodapé comum do site.
-
-Atualmente ele contém:
-
-* separador visual;
-* botão "← Back to Home".
-
-O rodapé é exibido automaticamente em todas as páginas, exceto na Home.
-
-Nenhum layout especializado deve duplicar essa funcionalidade.
-
----
+Todas as páginas do site herdam sua estrutura.
 
 ## Responsabilidades
 
-O layout base é responsável por:
-
-* estrutura HTML;
+* estrutura HTML principal;
 * elemento `<head>`;
-* carregamento do CSS global;
-* barra lateral;
-* área principal da página;
-* blocos reutilizáveis.
+* carregamento do CSS global (`assets/css/style.css`);
+* barra lateral de navegação;
+* área principal de conteúdo;
+* rodapé global do site.
 
-Ele não possui responsabilidade editorial.
-
----
-
-## O que não pertence ao base.njk
-
-O layout base não deve conter:
-
-* conteúdo de artigos;
-* listas de posts;
-* regras específicas do Blog;
-* lógica de publicação.
+O layout base nunca deve conter elementos específicos de uma seção do site.
 
 ---
 
-# blog.njk
+# Rodapé global
+
+O rodapé pertence exclusivamente ao `base.njk`.
+
+Ele é composto por:
+
+* separador visual;
+* botão:
+
+```text
+← Back to Home
+```
+
+O rodapé é exibido automaticamente em todas as páginas, exceto na Home.
+
+Nenhum outro layout deve recriar esse comportamento.
+
+---
+
+# Layout dos artigos
 
 Arquivo:
 
@@ -111,315 +58,156 @@ Arquivo:
 layouts/blog.njk
 ```
 
-O `blog.njk` é o layout utilizado exclusivamente pelos artigos do Blog.
+Este layout é utilizado exclusivamente pelos artigos publicados no Blog.
 
-É importante distinguir o layout dos artigos da página principal da seção Blog.
+Ele não representa a seção Blog como um todo.
 
-A página:
+A página de índice do Blog utiliza seu próprio template.
 
-```text
-content/blog/index.njk
-```
+---
 
-representa o índice do Blog.
+# Responsabilidades do blog.njk
 
-Já:
-
-```text
-content/blog/posts/*.md
-```
-
-representam os artigos individuais.
-
-Todos os artigos herdam automaticamente o `blog.njk`.
-## Navegação dos artigos
-
-O `blog.njk` é responsável pela experiência de leitura dos artigos.
+O `blog.njk` é responsável exclusivamente pela experiência de leitura dos artigos.
 
 Entre suas responsabilidades estão:
 
 * exibição da data de publicação;
-* título do artigo;
+* exibição do título;
+* renderização do conteúdo do artigo;
 * separadores visuais do artigo;
-* navegação automática entre artigos (Previous / Next).
-
-Esses elementos pertencem exclusivamente aos artigos e não devem aparecer na página principal do Blog nem nas demais seções do site.
-
----
-
-## Responsabilidades
-
-O `blog.njk` é responsável por apresentar elementos comuns a todos os artigos, incluindo:
-
-* data de publicação;
-* título do artigo;
-* separador visual entre cabeçalho e conteúdo;
-* conteúdo do artigo;
-* navegação automática entre artigos (Previous / Next).
-
-Ele não deve conter lógica de listagem de artigos nem elementos específicos da página principal do Blog.
+* navegação automática entre artigos (Previous / Next);
+* carregamento do CSS específico do Blog (`assets/css/blog.css`).
 
 ---
 
-## O que não pertence ao blog.njk
+# Formatação das datas
 
-Não pertencem ao `blog.njk`:
+O layout dos artigos não realiza qualquer formatação de datas.
 
-* a lista de artigos;
-* a barra lateral;
-* o botão "Back to Home";
-* elementos comuns a todas as páginas do site.
+A exibição utiliza o filtro:
 
-Esses elementos pertencem ao `base.njk` ou às páginas específicas da seção.
+```text
+formatPostDate
+```
+
+registrado em:
+
+```text
+.eleventy.js
+```
+
+Dessa forma, qualquer alteração futura no formato das datas deverá ser realizada apenas no filtro, sem necessidade de modificar os layouts.
 
 ---
 
-# index.njk
+# Navegação entre artigos
 
-O arquivo:
+A navegação entre artigos pertence exclusivamente ao `blog.njk`.
+
+Ela utiliza automaticamente a coleção oficial do Blog para identificar:
+
+* artigo anterior;
+* artigo seguinte.
+
+Essa navegação nunca deve aparecer na página principal do Blog nem nas demais seções do site.
+
+---
+
+# Página principal do Blog
+
+Arquivo:
 
 ```text
 content/blog/index.njk
 ```
 
-não é um layout.
+Este arquivo representa apenas o índice da seção Blog.
 
-Ele representa uma página do site.
+Suas responsabilidades são:
 
-Sua responsabilidade é listar automaticamente os artigos publicados.
+* listar os artigos publicados;
+* gerar os links para cada publicação.
 
-Ele nunca deverá ser tratado como um artigo.
-
----
-
-# Herança
-
-A arquitetura utiliza herança em apenas um sentido.
-
-```text
-base.njk
-
-↓
-
-blog.njk
-
-↓
-
-Markdown
-```
-
-Isso evita duplicação de estrutura.
+Ele não possui responsabilidades relacionadas à leitura dos artigos.
 
 ---
 
-# Estrutura recomendada
+# Organização dos estilos
 
-Sempre que uma nova seção necessitar de um comportamento visual diferente, deve ser criado um novo layout.
+O projeto adota a mesma separação de responsabilidades para os arquivos CSS.
 
-Exemplo futuro:
+## assets/css/style.css
 
-```text
-layouts/
+Responsável pelos estilos globais do site.
 
-base.njk
+Exemplos:
 
-blog.njk
-
-gallery.njk
-
-disease.njk
-```
-
-Cada layout deve possuir apenas uma responsabilidade.
+* estrutura principal;
+* barra lateral;
+* rodapé global;
+* separador do rodapé;
+* elementos compartilhados.
 
 ---
 
-# CSS
+## assets/css/blog.css
 
-O carregamento dos estilos segue duas camadas.
+Responsável exclusivamente pelos estilos dos artigos.
 
-Primeira camada:
+Exemplos:
 
-```text
-assets/css/style.css
-```
+* tipografia dos artigos;
+* data de publicação;
+* separadores internos;
+* navegação Previous / Next;
+* componentes exclusivos do Blog.
 
-Responsável por todo o site.
-
----
-
-Segunda camada:
-
-```text
-assets/css/blog.css
-```
-
-Responsável apenas pelos artigos do Blog.
-
-Novos layouts poderão possuir seus próprios arquivos CSS.
+Um componente global nunca deve depender deste arquivo.
 
 ---
 
-# Blocos
+# Separação de responsabilidades
 
-Os layouts utilizam blocos para permitir especializações.
+Cada layout deve possuir responsabilidades bem definidas.
 
-Atualmente os principais blocos são:
+## base.njk
 
-```text
-title
-
-extraCss
-
-body
-
-pageContent
-```
-
-Cada bloco possui uma responsabilidade específica.
+Infraestrutura comum do site.
 
 ---
 
-## title
+## blog.njk
 
-Define o título da página.
-
----
-
-## extraCss
-
-Permite carregar folhas de estilo específicas.
+Experiência de leitura dos artigos.
 
 ---
 
-## body
+## index.njk do Blog
 
-Representa o corpo principal da página.
-
----
-
-## pageContent
-
-Representa o conteúdo específico daquela página ou artigo.
+Listagem das publicações.
 
 ---
 
-# Organização
+## .eleventy.js
 
-A arquitetura procura separar quatro responsabilidades.
+Infraestrutura do Eleventy.
 
-```text
-Markdown
+Entre outras funções:
 
-↓
+* coleções;
+* filtros;
+* transformações;
+* formatação de dados.
 
-Conteúdo
-
-↓
-
-Layout
-
-↓
-
-Estrutura
-
-↓
-
-CSS
-```
-
-Cada camada conhece apenas sua própria responsabilidade.
+Toda lógica de transformação deve permanecer centralizada nesse arquivo, mantendo os layouts responsáveis apenas pela apresentação.
 
 ---
 
-# Quando criar um novo layout?
+# Princípio arquitetural
 
-Criar um novo layout apenas quando houver diferença estrutural.
+O projeto adota uma separação baseada em responsabilidades.
 
-Não criar layouts apenas para alterar pequenas propriedades visuais.
+Cada funcionalidade deve possuir um único local responsável por sua implementação.
 
-Mudanças pequenas devem ser realizadas através de CSS.
-
----
-
-# Quando reutilizar um layout?
-
-Sempre que duas páginas compartilham praticamente a mesma estrutura.
-
-A reutilização deve ser preferida sempre que possível.
-
----
-
-# Boas práticas
-
-* Um layout deve possuir apenas uma responsabilidade.
-* Evitar lógica de negócio dentro dos layouts.
-* Centralizar estrutura comum no layout base.
-* Especializar apenas quando necessário.
-* Reutilizar blocos.
-
----
-
-# Más práticas
-
-* Duplicar HTML entre layouts.
-* Misturar estrutura e conteúdo.
-* Criar layouts desnecessários.
-* Repetir CSS global em layouts especializados.
-
----
-
-# Decisões arquiteturais
-
-## Regra nº 1
-
-Todo layout deve possuir responsabilidade única.
-
----
-
-## Regra nº 2
-
-Layouts especializados herdam do layout base.
-
----
-
-## Regra nº 3
-
-Markdown nunca define estrutura HTML.
-
----
-
-## Regra nº 4
-
-Layouts nunca contêm conteúdo editorial.
-
----
-
-## Regra nº 5
-
-Mudanças de aparência devem ser resolvidas preferencialmente por CSS.
-
----
-
-# Evolução prevista
-
-Futuramente poderão existir layouts específicos para:
-
-* Disease
-* Pics
-* Galerias
-* Landing Pages
-
-Todos deverão seguir exatamente os mesmos princípios definidos neste documento.
-
----
-
-# Referências
-
-Relacionados:
-
-* `_01-arquitetura-de-diretorios.md`
-* `_02-convencoes-do-projeto.md`
-* `_06-estrutura-do-blog.md`
-* `03-layout-base.md`
-* `09-primeiro-post-e-refinamento-da-arquitetura-do-blog.md`
+Essa abordagem reduz duplicação de código, facilita a manutenção e torna o comportamento do projeto previsível conforme novas seções e funcionalidades forem adicionadas.
