@@ -89,6 +89,51 @@ h1 + hr {
     margin: 1.75rem 0;
 
 } */
+}
+/*
+ * ==========================================================
+ * Mídias dos artigos
+ * ==========================================================
+ */
 
+.blog-post img {
+
+    display: block;
+
+    max-width: 100%;
+
+    width: auto;
+
+    height: auto;
+
+    margin: 2rem auto;
+
+    vertical-align: middle;
+
+}
+
+.blog-post video {
+
+    display: block;
+
+    max-width: 100%;
+
+    width: auto;
+
+    height: auto;
+
+    margin: 2rem auto;
+
+    vertical-align: middle;
+
+}
+
+.blog-post audio {
+
+    display: block;
+
+    max-width: 100%;
+
+    margin: 2rem auto;
 
 }
